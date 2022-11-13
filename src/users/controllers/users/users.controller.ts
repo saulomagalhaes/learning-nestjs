@@ -9,6 +9,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ValidateCreateUserPipe } from 'src/users/pipes/validate-create-user/validate-create-user.pipe';
 import { UsersService } from 'src/users/services/users/users.service';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
 
@@ -28,7 +29,7 @@ export class UsersController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  createUser(@Body() userData: CreateUserDto) {
+  createUser(@Body(ValidateCreateUserPipe) userData: CreateUserDto) {
     this.userService.createUser(userData);
   }
 
